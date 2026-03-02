@@ -35,7 +35,6 @@ type Client struct {
 	KBV1             KBV1Service
 	SecurityGroup    SecurityGroupService
 	IAM              IAMService
-	HighlvlLoadBalancer HighlvlLoadBalancerService 
 }
 
 // DefaultClientOptions read from the environment (KRUTRIM_CLIENT_API_KEY,
@@ -77,8 +76,7 @@ func NewClient(opts ...option.RequestOption) (r Client) {
 	r.KBs = NewKBService(opts...)
 	r.KBV1 = NewKBV1Service(opts...)
 	r.SecurityGroup = NewSecurityGroupService(opts...)
-	r.IAM = NewIAMService(opts...)
-	r.HighlvlLoadBalancer = NewHighlvlLoadBalancerService(opts...) 
+	r.IAM = NewIAMService(opts...) 
 	return
 }
 
