@@ -11,7 +11,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/ola-silicon/krutrim-go-sdk/internal/requestconfig"
+	"github.com/ola-krutrim/krutrim-go-sdk/internal/requestconfig"
 	"github.com/tidwall/sjson"
 )
 
@@ -19,7 +19,7 @@ import (
 // which can be supplied to clients, services, and methods. You can read more about this functional
 // options pattern in our [README].
 //
-// [README]: https://pkg.go.dev/github.com/ola-silicon/krutrim-go-sdk#readme-requestoptions
+// [README]: https://pkg.go.dev/github.com/ola-krutrim/krutrim-go-sdk#readme-requestoptions
 type RequestOption = requestconfig.RequestOption
 
 // WithBaseURL returns a RequestOption that sets the BaseURL for the client.

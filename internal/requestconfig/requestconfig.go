@@ -18,10 +18,10 @@ import (
 	"strings"
 	"time"
 
-	"github.com/ola-silicon/krutrim-go-sdk/internal"
-	"github.com/ola-silicon/krutrim-go-sdk/internal/apierror"
-	"github.com/ola-silicon/krutrim-go-sdk/internal/apiform"
-	"github.com/ola-silicon/krutrim-go-sdk/internal/apiquery"
+	"github.com/ola-krutrim/krutrim-go-sdk/internal"
+	"github.com/ola-krutrim/krutrim-go-sdk/internal/apierror"
+	"github.com/ola-krutrim/krutrim-go-sdk/internal/apiform"
+	"github.com/ola-krutrim/krutrim-go-sdk/internal/apiquery"
 )
 
 func getDefaultHeaders() map[string]string {

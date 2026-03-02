@@ -1,8 +1,8 @@
 package paramutil
 
 import (
-	"github.com/ola-silicon/krutrim-go-sdk/packages/param"
-	"github.com/ola-silicon/krutrim-go-sdk/packages/respjson"
+	"github.com/ola-krutrim/krutrim-go-sdk/packages/param"
+	"github.com/ola-krutrim/krutrim-go-sdk/packages/respjson"
 )
 
 func AddrIfPresent[T comparable](v param.Opt[T]) *T {

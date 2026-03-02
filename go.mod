@@ -1,4 +1,4 @@
-module github.com/ola-silicon/krutrim-go-sdk
+module github.com/ola-krutrim/krutrim-go-sdk
 
 go 1.22
 

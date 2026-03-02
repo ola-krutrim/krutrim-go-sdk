@@ -1,7 +1,7 @@
 package krutrim
 
 import (
-	"github.com/ola-silicon/krutrim-go-sdk/packages/param"
+	"github.com/ola-krutrim/krutrim-go-sdk/packages/param"
 	"io"
 	"time"
 )

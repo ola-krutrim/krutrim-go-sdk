@@ -9,7 +9,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/ola-silicon/krutrim-go-sdk/packages/param"
+	"github.com/ola-krutrim/krutrim-go-sdk/packages/param"
 )
 
 var encoders sync.Map // map[reflect.Type]encoderFunc

@@ -3,8 +3,8 @@
 package krutrim
 
 import (
-	"github.com/ola-silicon/krutrim-go-sdk/internal/apierror"
-	"github.com/ola-silicon/krutrim-go-sdk/packages/param"
+	"github.com/ola-krutrim/krutrim-go-sdk/internal/apierror"
+	"github.com/ola-krutrim/krutrim-go-sdk/packages/param"
 )
 
 // aliased to make [param.APIUnion] private when embedding

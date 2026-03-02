@@ -2,7 +2,7 @@ package param
 
 import (
 	"encoding/json"
-	"github.com/ola-silicon/krutrim-go-sdk/internal/encoding/json/sentinel"
+	"github.com/ola-krutrim/krutrim-go-sdk/internal/encoding/json/sentinel"
 	"reflect"
 )
 

@@ -1,7 +1,7 @@
 package apijson
 
 import (
-	"github.com/ola-silicon/krutrim-go-sdk/packages/respjson"
+	"github.com/ola-krutrim/krutrim-go-sdk/packages/respjson"
 	"reflect"
 )
 

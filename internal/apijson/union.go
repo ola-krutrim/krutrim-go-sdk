@@ -2,7 +2,7 @@ package apijson
 
 import (
 	"errors"
-	"github.com/ola-silicon/krutrim-go-sdk/packages/param"
+	"github.com/ola-krutrim/krutrim-go-sdk/packages/param"
 	"reflect"
 
 	"github.com/tidwall/gjson"

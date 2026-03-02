@@ -7,7 +7,7 @@ import (
 	"strings"
 	"time"
 
-	shimjson "github.com/ola-silicon/krutrim-go-sdk/internal/encoding/json"
+	shimjson "github.com/ola-krutrim/krutrim-go-sdk/internal/encoding/json"
 
 	"github.com/tidwall/sjson"
 )

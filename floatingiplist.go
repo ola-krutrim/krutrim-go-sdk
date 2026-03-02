@@ -9,10 +9,10 @@ import (
 	"net/url"
 	"slices"
 
-	"github.com/ola-silicon/krutrim-go-sdk/internal/apiquery"
-	"github.com/ola-silicon/krutrim-go-sdk/internal/requestconfig"
-	"github.com/ola-silicon/krutrim-go-sdk/option"
-	"github.com/ola-silicon/krutrim-go-sdk/packages/param"
+	"github.com/ola-krutrim/krutrim-go-sdk/internal/apiquery"
+	"github.com/ola-krutrim/krutrim-go-sdk/internal/requestconfig"
+	"github.com/ola-krutrim/krutrim-go-sdk/option"
+	"github.com/ola-krutrim/krutrim-go-sdk/packages/param"
 )
 
 // FloatingIPListService contains methods and other services that help with

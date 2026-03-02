@@ -3,7 +3,7 @@
 package krutrim
 
 import (
-	"github.com/ola-silicon/krutrim-go-sdk/option"
+	"github.com/ola-krutrim/krutrim-go-sdk/option"
 )
 
 // SecurityGroupService contains methods and other services that help with

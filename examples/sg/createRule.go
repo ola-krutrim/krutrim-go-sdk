@@ -8,8 +8,8 @@ import (
 	"os"
 
 	"github.com/joho/godotenv"
-	krutrim "github.com/ola-silicon/krutrim-go-sdk"
-	"github.com/ola-silicon/krutrim-go-sdk/packages/param"
+	krutrim "github.com/ola-krutrim/krutrim-go-sdk"
+	"github.com/ola-krutrim/krutrim-go-sdk/packages/param"
 )
 
 func main() {

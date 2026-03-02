@@ -7,7 +7,7 @@ import (
 	"log"
 	"os"
 
-	"github.com/ola-silicon/krutrim-go-sdk"
+	"github.com/ola-krutrim/krutrim-go-sdk"
 )
 
 func main() {

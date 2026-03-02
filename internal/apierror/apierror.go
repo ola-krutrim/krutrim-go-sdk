@@ -7,9 +7,9 @@ import (
 	"net/http"
 	"net/http/httputil"
 
-	"github.com/ola-silicon/krutrim-go-sdk/internal/apijson"
+	"github.com/ola-krutrim/krutrim-go-sdk/internal/apijson"
 
-	"github.com/ola-silicon/krutrim-go-sdk/packages/respjson"
+	"github.com/ola-krutrim/krutrim-go-sdk/packages/respjson"
 )
 
 // Error represents an error that originates from the API, i.e. when a request is

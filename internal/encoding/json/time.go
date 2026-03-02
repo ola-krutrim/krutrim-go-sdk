@@ -2,7 +2,7 @@
 package json
 
 import (
-	"github.com/ola-silicon/krutrim-go-sdk/internal/encoding/json/shims"
+	"github.com/ola-krutrim/krutrim-go-sdk/internal/encoding/json/shims"
 	"reflect"
 	"time"
 )

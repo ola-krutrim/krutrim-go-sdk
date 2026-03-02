@@ -3,7 +3,7 @@
 package constant
 
 import (
-	shimjson "github.com/ola-silicon/krutrim-go-sdk/internal/encoding/json"
+	shimjson "github.com/ola-krutrim/krutrim-go-sdk/internal/encoding/json"
 )
 
 type Constant[T any] interface {

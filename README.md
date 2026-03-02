@@ -2,7 +2,7 @@
 
 <!-- x-release-please-start-version -->
 
-<a href="https://pkg.go.dev/github.com/ola-silicon/krutrim-go-sdk"><img src="https://pkg.go.dev/badge/github.com/ola-silicon/krutrim-go-sdk.svg" alt="Go Reference"></a>
+<a href="https://pkg.go.dev/github.com/ola-krutrim/krutrim-go-sdk"><img src="https://pkg.go.dev/badge/github.com/ola-krutrim/krutrim-go-sdk.svg" alt="Go Reference"></a>
 
 <!-- x-release-please-end -->
 
@@ -15,14 +15,14 @@ It is generated with [Stainless](https://www.stainless.com/).
 
 ```go
 import (
-	"github.com/ola-silicon/krutrim-go-sdk" // imported as krutrimclient
+	"github.com/ola-krutrim/krutrim-go-sdk" // imported as krutrimclient
 )
 ```
 
 Or to pin the version:
 
 ```sh
-go get -u 'github.com/ola-silicon/krutrim-go-sdk@v0.0.1'
+go get -u 'github.com/ola-krutrim/krutrim-go-sdk@v0.0.1'
 ```
 
 ## Requirements
@@ -40,8 +40,8 @@ package krutrim
 import (
 	"context"
 
-	"github.com/ola-silicon/krutrim-go-sdk"
-	"github.com/ola-silicon/krutrim-go-sdk/option"
+	"github.com/ola-krutrim/krutrim-go-sdk"
+	"github.com/ola-krutrim/krutrim-go-sdk/option"
 )
 
 func main() {
@@ -271,7 +271,7 @@ client.DeleteSubnet.Delete(context.TODO(), ...,
 
 The request option `option.WithDebugLog(nil)` may be helpful while debugging.
 
-See the [full list of request options](https://pkg.go.dev/github.com/ola-silicon/krutrim-go-sdk/option).
+See the [full list of request options](https://pkg.go.dev/github.com/ola-krutrim/krutrim-go-sdk/option).
 
 ### Pagination
 
@@ -493,7 +493,7 @@ This package generally follows [SemVer](https://semver.org/spec/v2.0.0.html) con
 
 We take backwards-compatibility seriously and work hard to ensure you can rely on a smooth upgrade experience.
 
-We are keen for your feedback; please open an [issue](https://www.github.com/ola-silicon/krutrim-go-sdk/issues) with questions, bugs, or suggestions.
+We are keen for your feedback; please open an [issue](https://www.github.com/ola-krutrim/krutrim-go-sdk/issues) with questions, bugs, or suggestions.
 
 ## Contributing
 
