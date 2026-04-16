@@ -16,25 +16,30 @@ import (
 // interacting with the krutrim-client API. You should not instantiate this client
 // directly, and instead use the [NewClient] method instead.
 type Client struct {
-	Options          []option.RequestOption
-	DeleteSubnet     DeleteSubnetService
-	CreateSubnet     CreateSubnetService
-	SearchSubnet     SearchSubnetService
-	CreateVpcAsync   CreateVpcAsyncService
-	GetVpcTaskStatus GetVpcTaskStatusService
-	SearchVpc        SearchVpcService
-	DescribeVpc      DescribeVpcService
-	DeleteVpc        DeleteVpcService
-	CreatePort       CreatePortService
-	FloatingIPList   FloatingIPListService
-	DeleteFloatingIP DeleteFloatingIPService
-	Highlvlvpc       HighlvlvpcService
-	Vm               VmService
-	Sshkey           SshkeyService
-	KBs              KBService
-	KBV1             KBV1Service
-	SecurityGroup    SecurityGroupService
-	IAM              IAMService
+	Options             []option.RequestOption
+	DeleteSubnet        DeleteSubnetService
+	CreateSubnet        CreateSubnetService
+	SearchSubnet        SearchSubnetService
+	CreateVpcAsync      CreateVpcAsyncService
+	GetVpcTaskStatus    GetVpcTaskStatusService
+	SearchVpc           SearchVpcService
+	DescribeVpc         DescribeVpcService
+	DeleteVpc           DeleteVpcService
+	CreatePort          CreatePortService
+	FloatingIPList      FloatingIPListService
+	DeleteFloatingIP    DeleteFloatingIPService
+	Highlvlvpc          HighlvlvpcService
+	Vm                  VmService
+	Sshkey              SshkeyService
+	KBs                 KBService
+	KBV1                KBV1Service
+	SecurityGroup       SecurityGroupService
+	IAM                 IAMService
+	Kcm                 KcmService
+	HighlvlLoadBalancer HighlvlLoadBalancerService
+	DNS                 DNSService
+	Ko                  KoService
+	IAMCustom IAMClient
 }
 
 // DefaultClientOptions read from the environment (KRUTRIM_CLIENT_API_KEY,
@@ -76,7 +81,12 @@ func NewClient(opts ...option.RequestOption) (r Client) {
 	r.KBs = NewKBService(opts...)
 	r.KBV1 = NewKBV1Service(opts...)
 	r.SecurityGroup = NewSecurityGroupService(opts...)
-	r.IAM = NewIAMService(opts...) 
+	r.IAM = NewIAMService(opts...)
+	r.Kcm = NewKcmService(opts...)
+	r.HighlvlLoadBalancer = NewHighlvlLoadBalancerService(opts...)
+	r.DNS = NewDNSService(opts...)
+	r.Ko = NewKoService(opts...)
+	r.IAMCustom = NewIAMClient(opts...)
 	return
 }
 
