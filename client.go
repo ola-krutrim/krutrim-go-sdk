@@ -8,8 +8,8 @@ import (
 	"os"
 	"slices"
 
-	"github.com/ola-krutrim/krutrim-go-sdk/internal/requestconfig"
-	"github.com/ola-krutrim/krutrim-go-sdk/option"
+	"github.com/ola-silicon/krutrim-go-sdk/internal/requestconfig"
+	"github.com/ola-silicon/krutrim-go-sdk/option"
 )
 
 // Client creates a struct with services and top level methods that help with
@@ -39,7 +39,7 @@ type Client struct {
 	HighlvlLoadBalancer HighlvlLoadBalancerService
 	DNS                 DNSService
 	Ko                  KoService
-
+	IAMCustom IAMClient
 }
 
 // DefaultClientOptions read from the environment (KRUTRIM_CLIENT_API_KEY,
@@ -86,6 +86,7 @@ func NewClient(opts ...option.RequestOption) (r Client) {
 	r.HighlvlLoadBalancer = NewHighlvlLoadBalancerService(opts...)
 	r.DNS = NewDNSService(opts...)
 	r.Ko = NewKoService(opts...)
+	r.IAMCustom = NewIAMClient(opts...)
 	return
 }
 
