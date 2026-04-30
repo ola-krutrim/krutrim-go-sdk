@@ -8,8 +8,8 @@ import (
 	"os"
 	"slices"
 
-	"github.com/ola-silicon/krutrim-go-sdk/internal/requestconfig"
-	"github.com/ola-silicon/krutrim-go-sdk/option"
+	"github.com/ola-krutrim/krutrim-go-sdk/internal/requestconfig"
+	"github.com/ola-krutrim/krutrim-go-sdk/option"
 )
 
 // Client creates a struct with services and top level methods that help with
