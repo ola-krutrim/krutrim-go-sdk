@@ -39,7 +39,7 @@ type Client struct {
 	HighlvlLoadBalancer HighlvlLoadBalancerService
 	DNS                 DNSService
 	Ko                  KoService
-
+	IAMCustom IAMClient
 }
 
 // DefaultClientOptions read from the environment (KRUTRIM_CLIENT_API_KEY,
@@ -86,6 +86,7 @@ func NewClient(opts ...option.RequestOption) (r Client) {
 	r.HighlvlLoadBalancer = NewHighlvlLoadBalancerService(opts...)
 	r.DNS = NewDNSService(opts...)
 	r.Ko = NewKoService(opts...)
+	r.IAMCustom = NewIAMClient(opts...)
 	return
 }
 
