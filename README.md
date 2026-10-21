@@ -60,6 +60,186 @@ func main() {
 
 ```
 
+### Krutrim Kubernetes Service (KKS)
+
+KKS is available through `client.KKS.V1`. Cluster operations use
+`client.KKS.V1.Cluster`, while the flavor and add-on catalogs use
+`client.KKS.V1.Flavor` and `client.KKS.V1.Addon`. All methods accept request
+options and use the client's existing authentication, base URL, retries, and
+context handling. Set `KRUTRIM_CLIENT_API_KEY` to your bearer token (without the
+`Bearer ` prefix). Pass raw, unescaped KRNs to SDK methods.
+
+| Operation | SDK method | HTTP endpoint |
+| --- | --- | --- |
+| Create cluster | `client.KKS.V1.Cluster.Create` | `POST /v1/kks/clusters` |
+| List clusters | `client.KKS.V1.Cluster.List` | `GET /v1/kks/clusters` |
+| Get cluster | `client.KKS.V1.Cluster.Get` | `GET /v1/kks/clusters/{clusterKRN}` |
+| Delete cluster | `client.KKS.V1.Cluster.Delete` | `DELETE /v1/kks/clusters/{clusterKRN}` |
+| Download kubeconfig | `client.KKS.V1.Cluster.GetKubeconfig` | `GET /v1/kks/clusters/{clusterKRN}/kubeconfig` |
+| Create node group | `client.KKS.V1.Cluster.NodeGroup.Create` | `POST /v1/kks/clusters/{clusterKRN}/node-groups` |
+| List node groups | `client.KKS.V1.Cluster.NodeGroup.List` | `GET /v1/kks/clusters/{clusterKRN}/node-groups` |
+| Get node group | `client.KKS.V1.Cluster.NodeGroup.Get` | `GET /v1/kks/clusters/{clusterKRN}/node-groups/{nodeGroupKRN}` |
+| Update node group config | `client.KKS.V1.Cluster.NodeGroup.UpdateConfig` | `POST /v1/kks/clusters/{clusterKRN}/node-groups/{nodeGroupKRN}/update-config` |
+| Delete node group | `client.KKS.V1.Cluster.NodeGroup.Delete` | `DELETE /v1/kks/clusters/{clusterKRN}/node-groups/{nodeGroupKRN}` |
+| Create add-on | `client.KKS.V1.Cluster.Addon.Create` | `POST /v1/kks/clusters/{clusterKRN}/addons` |
+| List installed add-ons | `client.KKS.V1.Cluster.Addon.List` | `GET /v1/kks/clusters/{clusterKRN}/addons` |
+| Delete add-on | `client.KKS.V1.Cluster.Addon.Delete` | `DELETE /v1/kks/clusters/{clusterKRN}/addons/{addonKRN}` |
+| List available add-ons | `client.KKS.V1.Addon.List` | `GET /v1/kks/addons` |
+| List flavors | `client.KKS.V1.Flavor.List` | `GET /v1/kks/flavors` |
+
+For example, with imports for `context`, `log`, `os`, `krutrim`, and `option`:
+
+```go
+client := krutrim.NewClient(
+	option.WithHeader("x-region", "In-Bangalore-1"),
+)
+ctx := context.Background()
+
+created, err := client.KKS.V1.Cluster.Create(ctx, krutrim.KKSV1ClusterCreateParams{
+	Name:    "test",
+	Version: "1.36",
+	ResourcesVPCConfig: krutrim.KKSResourcesVPCConfig{
+		VPCKRN:                "YOUR_VPC_KRN",
+		SubnetKRNs:            "YOUR_SUBNET_KRN",
+		EndpointPrivateAccess: false,
+	},
+	KubernetesNetworkConfig: krutrim.KKSKubernetesNetworkConfig{
+		PodIPv4CIDR:     "10.244.0.0/16",
+		ServiceIPv4CIDR: "10.96.0.0/12",
+	},
+})
+if err != nil {
+	log.Fatal(err)
+}
+clusterKRN := created.Cluster.KRN
+
+clusters, err := client.KKS.V1.Cluster.List(ctx, krutrim.KKSV1ClusterListParams{
+	Region: krutrim.String("In-Bangalore-1"), // Omit to list without a region filter.
+})
+if err != nil {
+	log.Fatal(err)
+}
+_ = clusters.Clusters
+
+cluster, err := client.KKS.V1.Cluster.Get(ctx, clusterKRN, krutrim.KKSV1ClusterGetParams{})
+if err != nil {
+	log.Fatal(err)
+}
+_ = cluster.Cluster.Status
+```
+
+Creation is asynchronous. Check cluster status with `Get` and wait for
+`PROVISIONED` before adding node groups or add-ons. The following calls are
+independent examples to run once the cluster is ready:
+
+```go
+nodegroup, err := client.KKS.V1.Cluster.NodeGroup.Create(ctx, clusterKRN, krutrim.KKSV1ClusterNodeGroupCreateParams{
+	Name:          "default-pool",
+	InstanceTypes: "CPU-4x-16GB",
+	DiskSize:      166,
+	ScalingConfig: krutrim.KKSScalingConfig{MinSize: 1, MaxSize: 5, DesiredSize: 2},
+	SubnetsKRN:    "YOUR_SUBNET_KRN",
+	Labels:        map[string]string{},
+	Taints:        []krutrim.KKSTaint{},
+	RemoteAccess: &krutrim.KKSRemoteAccess{
+		SourceSecurityGroupsKRNs: []string{},
+	},
+	NodeRepairConfig: &krutrim.KKSNodeRepairConfig{Enabled: true},
+})
+if err != nil {
+	log.Fatal(err)
+}
+_ = nodegroup.Nodegroup.KRN
+
+nodegroups, err := client.KKS.V1.Cluster.NodeGroup.List(ctx, clusterKRN, krutrim.KKSV1ClusterNodeGroupListParams{})
+if err != nil {
+	log.Fatal(err)
+}
+_ = nodegroups.Nodegroups
+
+addon, err := client.KKS.V1.Cluster.Addon.Create(ctx, clusterKRN, krutrim.KKSV1ClusterAddonCreateParams{
+	AddonName:    "csi",
+	AddonVersion: krutrim.String("1.0.0"), // Omit to use the server's default.
+})
+if err != nil {
+	log.Fatal(err)
+}
+_ = addon.Addon.AddonKRN
+
+kubeconfig, err := client.KKS.V1.Cluster.GetKubeconfig(ctx, clusterKRN, krutrim.KKSV1ClusterGetKubeconfigParams{})
+if err != nil {
+	log.Fatal(err)
+}
+if err := os.WriteFile("kubeconfig", kubeconfig, 0600); err != nil {
+	log.Fatal(err)
+}
+```
+
+`XRegion` on each method's parameter struct sets the `x-region` header; the list
+method's `Region` sets the separate `region` query parameter. Request options can
+override either the client header or `XRegion`. `SubnetKRNs`, `SubnetsKRN`, and
+`InstanceTypes` are strings, matching the API payloads. Optional node-group fields
+are omitted when unset, while explicitly empty maps and slices are sent as `{}`
+and `[]`. Use a pointer to `KKSNodeRepairConfig{Enabled: false}` to explicitly
+disable repair. Kubeconfig is returned as raw bytes, preserving the response format.
+
+`Flavor.List` returns a slice because `/v1/kks/flavors` returns a top-level JSON
+array. `Addon.List` returns the available catalog, including descriptions,
+versions, architectures, and cluster compatibility. `Cluster.Addon.List` returns
+installed add-ons with Unix timestamps; the add-on create response uses a
+`time.Time` for its ISO timestamp. Delete methods return an error and accept both
+empty and non-empty success responses. Use `option.WithResponseInto` to inspect
+the HTTP status when needed.
+
+`Cluster.NodeGroup.UpdateConfig` accepts a `KKSV1ClusterNodeGroupUpdateConfigParams`
+with `ScalingConfig` and optional `XRegion`. The response's `Update` contains
+`Status`, `Type`, fractional Unix `CreatedAt`, and `Errors`. Error items are
+preserved as `json.RawMessage` because their schema is unspecified.
+
+Each KKS operation has its own standalone example. Fill in the resource KRNs
+directly in the file, for example:
+
+```go
+vpcKRN := "enter the vpckrn"
+subnetKRN := "enter the subnetkrn"
+region := "In-Bangalore-1" // Replace with your region.
+```
+
+Only `KRUTRIM_CLIENT_API_KEY` is read from the environment by the examples;
+the examples also load `.env` when present. Set the key and run one file at a time:
+
+```sh
+export KRUTRIM_CLIENT_API_KEY='YOUR_BEARER_TOKEN'
+go run ./examples/kks/list_clusters.go
+go run ./examples/kks/create_cluster.go
+go run ./examples/kks/create_addon.go
+```
+
+The region is set directly in each file. Fill in these resource variables for the
+operation you want to run:
+
+| Example | Resource variables to fill in |
+| --- | --- |
+| [create_cluster.go](examples/kks/create_cluster.go) | `vpcKRN`, `subnetKRN` |
+| [list_clusters.go](examples/kks/list_clusters.go) | None |
+| [get_cluster.go](examples/kks/get_cluster.go) | `clusterKRN` |
+| [delete_cluster.go](examples/kks/delete_cluster.go) | `clusterKRN` |
+| [get_kubeconfig.go](examples/kks/get_kubeconfig.go) | `clusterKRN` |
+| [create_node_group.go](examples/kks/create_node_group.go) | `clusterKRN`, `subnetKRN` |
+| [list_node_groups.go](examples/kks/list_node_groups.go) | `clusterKRN` |
+| [get_node_group.go](examples/kks/get_node_group.go) | `clusterKRN`, `nodeGroupKRN` |
+| [update_node_group_config.go](examples/kks/update_node_group_config.go) | `clusterKRN`, `nodeGroupKRN` |
+| [delete_node_group.go](examples/kks/delete_node_group.go) | `clusterKRN`, `nodeGroupKRN` |
+| [create_addon.go](examples/kks/create_addon.go) | `clusterKRN` |
+| [list_cluster_addons.go](examples/kks/list_cluster_addons.go) | `clusterKRN` |
+| [delete_addon.go](examples/kks/delete_addon.go) | `clusterKRN`, `addonKRN` |
+| [list_addons.go](examples/kks/list_addons.go) | None |
+| [list_flavors.go](examples/kks/list_flavors.go) | None |
+
+These files use `//go:build ignore` so their independent `main` functions are
+excluded from package builds. Explicit `go run` or `go test` commands naming one
+example file still compile it normally.
+
 ### Request fields
 
 The krutrimclient library uses the [`omitzero`](https://tip.golang.org/doc/go1.24#encodingjsonpkgencodingjson)

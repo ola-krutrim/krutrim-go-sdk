@@ -1,0 +1,237 @@
+{
+    "addons": [
+        {
+            "addonName": "csi",
+            "type": "storage",
+            "description": "Provides persistent block storage capabilities through the OpenStack Cinder Container Storage Interface (CSI) driver, enabling dynamic provisioning and management of persistent volumes.",
+            "isDeletable": true,
+            "addonVersions": [
+                {
+                    "addonVersion": "1.0.0",
+                    "architecture": [
+                        "amd64",
+                        "arm64"
+                    ],
+                    "compatibilities": [
+                        {
+                            "clusterVersion": "1.33",
+                            "platformVersions": [
+                                "*"
+                            ],
+                            "defaultVersion": true
+                        },
+                        {
+                            "clusterVersion": "1.34",
+                            "platformVersions": [
+                                "*"
+                            ],
+                            "defaultVersion": true
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "addonName": "cilium",
+            "type": "networking",
+            "description": "Advanced eBPF-based networking, security, and observability solution with built-in kube-proxy replacement, providing high-performance network connectivity and visibility for Kubernetes workloads. Note: When using Cilium, kube-proxy installation is not required.",
+            "isDeletable": true,
+            "addonVersions": [
+                {
+                    "addonVersion": "1.18.2",
+                    "architecture": [
+                        "amd64",
+                        "arm64"
+                    ],
+                    "compatibilities": [
+                        {
+                            "clusterVersion": "1.33",
+                            "platformVersions": [
+                                "*"
+                            ],
+                            "defaultVersion": true
+                        },
+                        {
+                            "clusterVersion": "1.34",
+                            "platformVersions": [
+                                "*"
+                            ],
+                            "defaultVersion": true
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "addonName": "cluster-autoscaler",
+            "type": "autoscaling",
+            "description": "Automatically scales cluster node groups up or down based on resource demands, ensuring optimal resource utilization and cost efficiency.",
+            "isDeletable": true,
+            "addonVersions": [
+                {
+                    "addonVersion": "9.50.1",
+                    "architecture": [
+                        "amd64",
+                        "arm64"
+                    ],
+                    "compatibilities": [
+                        {
+                            "clusterVersion": "1.33",
+                            "platformVersions": [
+                                "*"
+                            ],
+                            "defaultVersion": true
+                        },
+                        {
+                            "clusterVersion": "1.34",
+                            "platformVersions": [
+                                "*"
+                            ],
+                            "defaultVersion": true
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "addonName": "metrics-server",
+            "type": "monitoring",
+            "description": "Collects and aggregates resource metrics from kubelets, providing essential CPU and memory usage data for horizontal pod autoscaling and resource monitoring.",
+            "isDeletable": true,
+            "addonVersions": [
+                {
+                    "addonVersion": "3.13.0",
+                    "architecture": [
+                        "amd64",
+                        "arm64"
+                    ],
+                    "compatibilities": [
+                        {
+                            "clusterVersion": "1.33",
+                            "platformVersions": [
+                                "*"
+                            ],
+                            "defaultVersion": true
+                        },
+                        {
+                            "clusterVersion": "1.34",
+                            "platformVersions": [
+                                "*"
+                            ],
+                            "defaultVersion": true
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "addonName": "coredns",
+            "type": "dns",
+            "description": "Flexible and extensible DNS server that provides service discovery and name resolution for cluster resources, serving as the default DNS solution for Kubernetes.",
+            "isDeletable": true,
+            "addonVersions": [
+                {
+                    "addonVersion": "1.12.4",
+                    "architecture": [
+                        "amd64",
+                        "arm64"
+                    ],
+                    "compatibilities": [
+                        {
+                            "clusterVersion": "1.33",
+                            "platformVersions": [
+                                "*"
+                            ],
+                            "defaultVersion": true
+                        },
+                        {
+                            "clusterVersion": "1.34",
+                            "platformVersions": [
+                                "*"
+                            ],
+                            "defaultVersion": true
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "addonName": "kube-proxy",
+            "type": "networking",
+            "description": "Manages network routing rules on cluster nodes, enabling service discovery and load balancing for Kubernetes services across the cluster.",
+            "isDeletable": true,
+            "addonVersions": [
+                {
+                    "addonVersion": "1.33.0",
+                    "architecture": [
+                        "amd64",
+                        "arm64"
+                    ],
+                    "compatibilities": [
+                        {
+                            "clusterVersion": "1.33",
+                            "platformVersions": [
+                                "*"
+                            ],
+                            "defaultVersion": true
+                        },
+                        {
+                            "clusterVersion": "1.34",
+                            "platformVersions": [
+                                "*"
+                            ],
+                            "defaultVersion": false
+                        }
+                    ]
+                },
+                {
+                    "addonVersion": "1.34.0",
+                    "architecture": [
+                        "amd64",
+                        "arm64"
+                    ],
+                    "compatibilities": [
+                        {
+                            "clusterVersion": "1.33",
+                            "platformVersions": [
+                                "*"
+                            ],
+                            "defaultVersion": false
+                        },
+                        {
+                            "clusterVersion": "1.34",
+                            "platformVersions": [
+                                "*"
+                            ],
+                            "defaultVersion": true
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "addonName": "gpu-operator",
+            "type": "gpu",
+            "description": "NVIDIA GPU Operator that automates the deployment and management of GPU drivers, device plugins, and monitoring components for GPU-accelerated workloads in Kubernetes clusters.",
+            "isDeletable": true,
+            "addonVersions": [
+                {
+                    "addonVersion": "25.10.1",
+                    "architecture": [
+                        "amd64",
+                        "arm64"
+                    ],
+                    "compatibilities": [
+                        {
+                            "clusterVersion": "1.33",
+                            "platformVersions": [
+                                "*"
+                            ],
+                            "defaultVersion": true
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
