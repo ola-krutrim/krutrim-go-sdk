@@ -39,6 +39,7 @@ type Client struct {
 	HighlvlLoadBalancer HighlvlLoadBalancerService
 	DNS                 DNSService
 	Ko                  KoService
+	KKS                 KKSService
 	IAMCustom IAMClient
 }
 
@@ -86,6 +87,7 @@ func NewClient(opts ...option.RequestOption) (r Client) {
 	r.HighlvlLoadBalancer = NewHighlvlLoadBalancerService(opts...)
 	r.DNS = NewDNSService(opts...)
 	r.Ko = NewKoService(opts...)
+	r.KKS = NewKKSService(opts...)
 	r.IAMCustom = NewIAMClient(opts...)
 	return
 }
