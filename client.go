@@ -40,7 +40,7 @@ type Client struct {
 	DNS                 DNSService
 	Ko                  KoService
 	KKS                 KKSService
-	IAMCustom           IAMClient
+	IAMCustom IAMClient
 }
 
 // DefaultClientOptions read from the environment (KRUTRIM_CLIENT_API_KEY,
